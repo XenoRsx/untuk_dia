@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Azureen Sayang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --blush:#FFE3EC;
+    --petal:#FFC6D7;
+    --rose:#E8527F;
+    --rose-deep:#C23866;
+    --plum:#5A2743;
+    --butter:#FFE8A3;
+    --mint:#BFE8D6;
+    --paper:#FFF8FA;
+    --ink-soft:#8A5570;
+  }
+  *{box-sizing:border-box}
+  html,body{min-height:100%}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 10%, #fff3f7 0 18%, transparent 40%),
+      radial-gradient(circle at 90% 30%, #ffd9e5 0 12%, transparent 35%),
+      var(--blush);
+    color:var(--plum);
+    font-family:"Nunito", system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    padding-inline:16px;
+    padding-block:32px 64px;
+    overflow-x:hidden;
+  }
+  #hearts{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+  main{position:relative;z-index:1;max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:28px}
+
+  .bear{width:150px;height:auto;animation:bob 3.2s ease-in-out infinite;filter:drop-shadow(0 8px 0 rgba(194,56,102,.12))}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+
+  h1{
+    font-family:"Fredoka", "Nunito", system-ui, sans-serif;
+    font-weight:700;
+    font-size:clamp(2.2rem, 8vw, 3.4rem);
+    line-height:1.05;
+    text-align:center;
+    margin:0;
+    color:var(--rose-deep);
+    text-wrap:balance;
+    letter-spacing:-.01em;
+  }
+  h1 span{display:block;font-family:"Caveat", cursive;font-weight:700;color:var(--plum);font-size:.7em;margin-top:6px;transform:rotate(-2deg)}
+
+  .letter{
+    width:100%;
+    background:var(--paper);
+    border-radius:22px;
+    padding:28px 24px 24px;
+    box-shadow:0 2px 0 var(--petal), 0 18px 40px -18px rgba(194,56,102,.45);
+    position:relative;
+    background-image:repeating-linear-gradient(to bottom, transparent 0 33px, #fbdbe6 33px 34px);
+    background-position:0 18px;
+  }
+  .letter::before{
+    content:"";position:absolute;top:-14px;left:50%;width:90px;height:28px;transform:translateX(-50%) rotate(-3deg);
+    background:rgba(191,232,214,.85);border-radius:4px;
+  }
+  .letter p{margin:0 0 12px;font-family:"Caveat", cursive;font-size:1.55rem;line-height:34px;color:var(--plum)}
+  .letter .sign{text-align:right;margin:8px 0 0;color:var(--rose-deep);font-weight:700}
+
+  .reasons{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .reason{
+    background:#fff;border:2px dashed var(--petal);border-radius:16px;padding:14px 16px;
+    font-weight:600;font-size:.95rem;display:flex;gap:10px;align-items:flex-start;
+  }
+  .reason svg{flex:none;margin-top:3px}
+  .label{font-family:"Fredoka",sans-serif;font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 -14px}
+
+  .ask{
+    width:100%;background:var(--butter);border-radius:24px;padding:26px 20px 30px;text-align:center;position:relative;
+    box-shadow:0 18px 40px -22px rgba(90,39,67,.5);
+  }
+  .ask h2{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.6rem;margin:0 0 4px;color:var(--plum);text-wrap:balance}
+  .ask .hint{margin:0 0 20px;color:var(--ink-soft);font-size:.95rem}
+  .buttons{position:relative;height:120px;display:flex;justify-content:center;align-items:center;gap:16px}
+  button{
+    font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.15rem;border:0;border-radius:999px;cursor:pointer;
+    padding:14px 30px;transition:transform .18s ease, box-shadow .18s ease, left .25s ease, top .25s ease;
+  }
+  button:focus-visible{outline:3px solid var(--plum);outline-offset:3px}
+  #yes{background:var(--rose);color:#fff;box-shadow:0 5px 0 var(--rose-deep)}
+  #yes:hover{transform:translateY(-2px) scale(1.04)}
+  #yes:active{transform:translateY(3px);box-shadow:0 2px 0 var(--rose-deep)}
+  #no{background:#fff;color:var(--ink-soft);box-shadow:0 4px 0 #e9c9d6}
+  #no.run{position:absolute}
+  .no-msg{min-height:1.5em;margin:8px 0 0;font-family:"Caveat",cursive;font-size:1.4rem;color:var(--rose-deep)}
+
+  .yay{
+    position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:16px;
+    background:rgba(255,227,236,.88);backdrop-filter:blur(4px);
+  }
+  .yay-card{
+    background:var(--paper);border-radius:28px;padding:32px 26px;max-width:420px;text-align:center;
+    box-shadow:0 30px 60px -25px rgba(194,56,102,.6);animation:pop .5s cubic-bezier(.2,1.6,.4,1);
+  }
+  @keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  .yay-card h3{font-family:"Fredoka",sans-serif;font-size:2rem;margin:10px 0 6px;color:var(--rose-deep)}
+  .yay-card p{margin:0 0 18px;font-size:1.05rem}
+  .big-heart{font-size:0;width:90px;height:90px;margin:0 auto;animation:beat 1s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}20%{transform:scale(1.18)}40%{transform:scale(.96)}60%{transform:scale(1.1)}}
+  #close{background:var(--mint);color:var(--plum);box-shadow:0 4px 0 #8fcbb1}
+
+  footer{font-family:"Caveat",cursive;font-size:1.3rem;color:var(--ink-soft);text-align:center}
+
+  @media (prefers-reduced-motion: reduce){
+    .bear,.big-heart,.yay-card{animation:none}
+    button{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="hearts" aria-hidden="true"></canvas>
+
+<main>
+  <svg class="bear" viewBox="0 0 160 150" role="img" aria-label="Beruang kecil pegang hati">
+    <circle cx="38" cy="36" r="22" fill="#D99A76"/><circle cx="38" cy="36" r="11" fill="#FFC6D7"/>
+    <circle cx="122" cy="36" r="22" fill="#D99A76"/><circle cx="122" cy="36" r="11" fill="#FFC6D7"/>
+    <ellipse cx="80" cy="78" rx="58" ry="52" fill="#E6AE8A"/>
+    <ellipse cx="80" cy="96" rx="26" ry="19" fill="#F6D5BE"/>
+    <path d="M52 66 q7 -7 14 0" stroke="#5A2743" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M94 66 q7 -7 14 0" stroke="#5A2743" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M58 74 q-2 8 -6 11" stroke="#7CC3E8" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="80" cy="89" rx="7" ry="5" fill="#5A2743"/>
+    <path d="M72 102 q8 -6 16 0" stroke="#5A2743" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="46" cy="90" rx="9" ry="6" fill="#FF9AB8" opacity=".7"/>
+    <ellipse cx="114" cy="90" rx="9" ry="6" fill="#FF9AB8" opacity=".7"/>
+    <path d="M80 148 C58 132 50 120 58 110 C64 103 74 105 80 113 C86 105 96 103 102 110 C110 120 102 132 80 148Z" fill="#E8527F"/>
+    <ellipse cx="54" cy="118" rx="11" ry="9" fill="#D99A76"/><ellipse cx="106" cy="118" rx="11" ry="9" fill="#D99A76"/>
+  </svg>
+
+  <h1>I'm Sorry, Azureen<span>maafkan saya ya sayang…</span></h1>
+
+  <article class="letter">
+    <p>Azureen sayang,</p>
+    <p>Saya tahu saya dah buat awak sedih. Saya betul-betul minta maaf. Bukan niat saya nak buat awak rasa macam tu.</p>
+    <p>Awak orang yang paling penting untuk saya, dan saya tak suka tengok awak marah atau terluka sebab saya.</p>
+    <p>Saya janji saya akan lebih dengar, lebih sabar, dan jaga hati awak elok-elok lepas ni.</p>
+    <p class="sign">— Syafiq, yang tengah menyesal sangat</p>
+  </article>
+
+  <p class="label">janji saya</p>
+  <section class="reasons" aria-label="Janji">
+    <div class="reason"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#E8527F" d="M12 21C6 16.5 2 13 2 8.5 2 5.4 4.4 3 7.3 3c1.9 0 3.6 1 4.7 2.5C13.1 4 14.8 3 16.7 3 19.6 3 22 5.4 22 8.5 22 13 18 16.5 12 21z"/></svg>Lebih dengar cakap awak</div>
+    <div class="reason"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#E8527F" d="M12 21C6 16.5 2 13 2 8.5 2 5.4 4.4 3 7.3 3c1.9 0 3.6 1 4.7 2.5C13.1 4 14.8 3 16.7 3 19.6 3 22 5.4 22 8.5 22 13 18 16.5 12 21z"/></svg>Tak buat awak risau lagi</div>
+    <div class="reason"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#E8527F" d="M12 21C6 16.5 2 13 2 8.5 2 5.4 4.4 3 7.3 3c1.9 0 3.6 1 4.7 2.5C13.1 4 14.8 3 16.7 3 19.6 3 22 5.4 22 8.5 22 13 18 16.5 12 21z"/></svg>Belanja awak makan sedap</div>
+    <div class="reason"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#E8527F" d="M12 21C6 16.5 2 13 2 8.5 2 5.4 4.4 3 7.3 3c1.9 0 3.6 1 4.7 2.5C13.1 4 14.8 3 16.7 3 19.6 3 22 5.4 22 8.5 22 13 18 16.5 12 21z"/></svg>Sayang awak lebih lagi</div>
+  </section>
+
+  <section class="ask">
+    <h2>Awak maafkan saya tak?</h2>
+    <p class="hint">pilih elok-elok tau 🥺</p>
+    <div class="buttons" id="zone">
+      <button id="yes" type="button">Ya, saya maafkan</button>
+      <button id="no" type="button">Tak nak</button>
+    </div>
+    <p class="no-msg" id="noMsg" aria-live="polite"></p>
+  </section>
+
+  <footer>dibuat dengan penuh sayang, untuk Azureen seorang ♡</footer>
+</main>
+
+<div class="yay" id="yay" hidden>
+  <div class="yay-card" role="dialog" aria-labelledby="yayTitle">
+    <svg class="big-heart" viewBox="0 0 24 24" aria-hidden="true"><path fill="#E8527F" d="M12 21C6 16.5 2 13 2 8.5 2 5.4 4.4 3 7.3 3c1.9 0 3.6 1 4.7 2.5C13.1 4 14.8 3 16.7 3 19.6 3 22 5.4 22 8.5 22 13 18 16.5 12 21z"/></svg>
+    <h3 id="yayTitle">Yeayyy! Terima kasih sayang!</h3>
+    <p>Awak memang terbaik. Saya sayang awak sangat-sangat, Azureen ♡</p>
+    <button id="close" type="button">Peluk jauh-jauh 🤗</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var c = document.getElementById('hearts'), ctx = c.getContext('2d');
+  var W, H, dpr = Math.min(window.devicePixelRatio||1, 2), hearts = [];
+  var colors = ['#E8527F','#FF9AB8','#FFC6D7','#F7A1C4','#BFE8D6','#FFE8A3'];
+  function resize(){ W = innerWidth; H = innerHeight; c.width = W*dpr; c.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  resize(); addEventListener('resize', resize);
+  function make(burst){
+    return { x: burst ? W/2 + (Math.random()-.5)*120 : Math.random()*W,
+      y: burst ? H/2 : H + 20 + Math.random()*H,
+      s: 8 + Math.random()*14,
+      vy: burst ? -(3+Math.random()*6) : -(0.3+Math.random()*0.7),
+      vx: burst ? (Math.random()-.5)*8 : 0,
+      g: burst ? 0.12 : 0,
+      w: Math.random()*Math.PI*2,
+      col: colors[Math.floor(Math.random()*colors.length)],
+      a: burst ? 1 : .55, burst: !!burst };
+  }
+  for (var i=0;i<(reduce?0:22);i++) hearts.push(make(false));
+  function heart(x,y,s,col,a){
+    ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=col; ctx.translate(x,y); ctx.scale(s/24,s/24);
+    ctx.beginPath(); ctx.moveTo(0,7);
+    ctx.bezierCurveTo(-10,-1,-12,-9,-6,-11); ctx.bezierCurveTo(-3,-12,-1,-10,0,-7);
+    ctx.bezierCurveTo(1,-10,3,-12,6,-11); ctx.bezierCurveTo(12,-9,10,-1,0,7);
+    ctx.fill(); ctx.restore();
+  }
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for (var i=hearts.length-1;i>=0;i--){
+      var h=hearts[i];
+      h.w+=0.03; h.vy+=h.g; h.y+=h.vy; h.x+=h.vx + (h.burst?0:Math.sin(h.w)*0.4);
+      if (h.burst){ h.a-=0.008; if(h.a<=0){hearts.splice(i,1);continue;} }
+      else if (h.y < -30){ h.y = H+20; h.x = Math.random()*W; }
+      heart(h.x,h.y,h.s,h.col,h.a);
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  var no = document.getElementById('no'), zone = document.getElementById('zone'), msg = document.getElementById('noMsg');
+  var yes = document.getElementById('yes');
+  var lines = ['eh eh jangan la…','sayang pleaseee 🥺','tekan butang merah tu je','saya dah menyesal sangat…','ala, maafkan la ya?','butang ni rosak, cuba lagi satu 😝'];
+  var n = 0, scale = 1;
+  function dodge(e){
+    if (e) e.preventDefault();
+    no.classList.add('run');
+    var zr = zone.getBoundingClientRect(), bw = no.offsetWidth, bh = no.offsetHeight;
+    no.style.left = Math.max(0, Math.random()*(zr.width - bw)) + 'px';
+    no.style.top = Math.max(0, Math.random()*(zr.height - bh)) + 'px';
+    msg.textContent = lines[n % lines.length]; n++;
+    scale = Math.min(scale + 0.1, 1.6);
+    yes.style.transform = 'scale(' + scale + ')';
+    if (n >= 6) no.hidden = true;
+  }
+  no.addEventListener('mouseenter', dodge);
+  no.addEventListener('touchstart', dodge, {passive:false});
+  no.addEventListener('click', dodge);
+
+  var yay = document.getElementById('yay');
+  yes.addEventListener('click', function(){
+    yay.hidden = false;
+    msg.textContent = '';
+    if (!reduce) for (var i=0;i<70;i++) hearts.push(make(true));
+    document.getElementById('close').focus();
+  });
+  document.getElementById('close').addEventListener('click', function(){
+    yay.hidden = true;
+    if (!reduce) for (var i=0;i<40;i++) hearts.push(make(true));
+  });
+})();
+</script>
+</body>
+</html>
